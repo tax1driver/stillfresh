@@ -37,15 +37,13 @@ function AddressForm() {
 
 
     return (
-        <div className="accounts-page">
-            <div className="accounts-col">
-                <h3>Uzupelnij swoje dane adresowe</h3>
-                <input type="text" name="street" value={form["street"] || ""} onChange={handleChange} placeholder="Ulica i numer domu" />
-                <input type="text" name="additional" value={form["additional"] || ""} onChange={handleChange} placeholder="Nr mieszkania/klatka/inne" />
-                <input type="text" name="postcode" value={form["postcode"] || ""} onChange={handleChange} pattern="^\d{2}-\d{3}$" placeholder="Kod pocztowy" />
-                <input type="text" name="city" value={form["city"] || ""} onChange={handleChange} placeholder="Miejscowość" />
-                <button onClick={changeAccDetails} className="btn btn-green">Wyslij</button>
-            </div>
+        <div className="contact-form">
+            <h3>Uzupelnij swoje dane adresowe</h3>
+            <input type="text" name="street" value={form["street"] || ""} onChange={handleChange} placeholder="Ulica i numer domu" />
+            <input type="text" name="additional" value={form["additional"] || ""} onChange={handleChange} placeholder="Nr mieszkania/klatka/inne" />
+            <input type="text" name="postcode" value={form["postcode"] || ""} onChange={handleChange} pattern="^\d{2}-\d{3}$" placeholder="Kod pocztowy" />
+            <input type="text" name="city" value={form["city"] || ""} onChange={handleChange} placeholder="Miejscowość" />
+            <button onClick={changeAccDetails} className="btn btn-green">Wyslij</button>
         </div>
     )
 }

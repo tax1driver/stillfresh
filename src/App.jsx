@@ -9,7 +9,7 @@ import Products from './Products'
 import Cart from './Cart'
 import Contact from './Contact'
 import LoginRegister from './LoginRegister'
-import AddressForm from './AddressForm'
+import AccountPage from './AccountPage'
 
 import {CartContext} from './CartContext'
 import {AccountContext} from './AccountContext'
@@ -124,7 +124,7 @@ function App() {
         <div className="bar-left"></div>
         <div className="bar-right"></div>
         <div className="content">
-          {account != null ? account.email : "a"}
+          {account != null ? account.email : ""}
           <Routes>
             <Route path="/products" element={<Products />} />
             <Route path="/terms" element={<Terms />} />
@@ -132,7 +132,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/lr" element={<LoginRegister />} />
-            <Route path="/lr/2" element={<AddressForm />} />
+            <Route path="/acc" element={<AccountPage />} />
             <Route
               path="/"
               element={<Navigate to="/products" replace />}
