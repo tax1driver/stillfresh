@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CookiesProvider, useCookies } from 'react-cookie'
 import { NavLink, Routes, Route, Navigate } from 'react-router-dom'
 
@@ -10,9 +10,11 @@ import Cart from './Cart'
 import Contact from './Contact'
 import LoginRegister from './LoginRegister'
 import AccountPage from './AccountPage'
+import CartCheckout from './CartCheckout'
+import CartSuccess from './CartSuccess'
 
-import {CartContext} from './CartContext'
-import {AccountContext} from './AccountContext'
+import { CartContext } from './CartContext'
+import { AccountContext } from './AccountContext'
 
 function App() {
   const mountScrollAnimation = () => {
@@ -101,35 +103,48 @@ function App() {
     setCart([])
   }
 
-  const [cookies, setCookie, removeCookie] = useCookies()
+  const [cookies, setCookie, removeCookie] = useCookies();
+
+  const removeAccount = () => {
+    if (account == null) return;
+    let cookie = Object.assign({}, cookies.accounts)
+
+    delete cookie[account.email]
+
+    setAccount(null)
+    setCookie('accounts', cookie)
+  }
 
   if (cookies.accounts === undefined) {
     setCookie('accounts', {})
   }
 
-  const saveAccountToCookie = () => {
+  useEffect(() => {
+    if (account == null) return;
+
     let cookie = Object.assign({}, cookies.accounts)
 
     cookie[account.email] = account
 
     setCookie('accounts', cookie)
-  }
+  }, [ account ])
 
   return (
     <CookiesProvider>
-    <AccountContext.Provider value={{account, setAccount, saveAccountToCookie}}>
+    <AccountContext.Provider value={{account, setAccount, removeAccount}}>
     <CartContext.Provider value={{ cart, addToCart, removeFromCart, changeCartItemQuantity, clearCart }}>
       <div className="app">
         <Header onMounted={mountScrollAnimation} />
         <div className="bar-left"></div>
         <div className="bar-right"></div>
         <div className="content">
-          {account != null ? account.email : ""}
           <Routes>
             <Route path="/products" element={<Products />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/cart/checkout" element={<CartCheckout />} />
+            <Route path="/cart/success" element={<CartSuccess />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/lr" element={<LoginRegister />} />
             <Route path="/acc" element={<AccountPage />} />

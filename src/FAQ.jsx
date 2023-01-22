@@ -1,7 +1,8 @@
 function FAQ() {
     return (
-        <div className="faq-page">
-            <h1 className="text-center">FAQ</h1>
+        <div className="faq-page p-15">
+            <h1 style={{marginBottom: 4 + "px"}}>FAQ</h1>
+            <span className="text-secondary mb">Najczęściej zadawane pytania</span>
 
             <ol className="faq">
                 <li>
