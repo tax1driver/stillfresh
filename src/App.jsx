@@ -16,6 +16,8 @@ import CartSuccess from './CartSuccess'
 import { CartContext } from './CartContext'
 import { AccountContext } from './AccountContext'
 
+const ARBITRARY_DATE_VALUE = new Date(8640000000000);
+
 function App() {
   const mountScrollAnimation = () => {
     let header = document.getElementsByClassName("divider")[0];
@@ -112,21 +114,41 @@ function App() {
     delete cookie[account.email]
 
     setAccount(null)
-    setCookie('accounts', cookie)
+    setCookie('accounts', cookie, {
+      expires: ARBITRARY_DATE_VALUE
+    })
+
+    removeCookie('loggedAccount');
   }
 
   if (cookies.accounts === undefined) {
-    setCookie('accounts', {})
+    setCookie('accounts', {}, {
+      expires: ARBITRARY_DATE_VALUE
+    })
   }
 
   useEffect(() => {
-    if (account == null) return;
+    if (cookies.loggedAccount !== undefined && cookies.accounts[cookies.loggedAccount] !== undefined) {
+      setAccount(cookies.accounts[cookies.loggedAccount]);
+    } else {
+      removeCookie('loggedAccount');
+    }
+  }, [])
+  
+  useEffect(() => {
+    if (account === null || account === undefined) {
+      removeCookie('loggedAccount');
+      return;
+    }
 
     let cookie = Object.assign({}, cookies.accounts)
-
     cookie[account.email] = account
 
-    setCookie('accounts', cookie)
+    setCookie('accounts', cookie, {
+      expires: ARBITRARY_DATE_VALUE
+    })
+
+    setCookie('loggedAccount', account.email)
   }, [ account ])
 
   return (

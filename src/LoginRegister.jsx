@@ -5,7 +5,7 @@ import { AccountContext } from "./AccountContext"
 
 
 function LoginRegister() {
-    let { account, setAccount } = useContext(AccountContext)
+    let { account, setAccount, saveSessionStateCookie } = useContext(AccountContext)
     let [ form, setForm ] = useState({})
 
 

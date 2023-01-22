@@ -361,12 +361,20 @@ body {
   padding: 8px;
   text-align: center;
   text-decoration: none;
-  border-radius: 50%;
+  border-radius: 4px;
   color: #27272a;
   font-weight: 700;
   line-height: 180%;
-  fill: #a3e635;
-  stroke: #a3e635;
+  background-color: transparent;
+  transition: background-color 150ms;
+  fill: #b8ec62;
+  stroke: #b8ec62;
+}
+.product-btn-area > a:hover {
+  background-color: #18181a;
+}
+.product-btn-area > a:active {
+  background-color: #0e0e10;
 }
 .product-btn-area > a > svg {
   width: 22px;

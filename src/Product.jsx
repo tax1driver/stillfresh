@@ -19,6 +19,7 @@ function Product(props) {
 
     let price = formatter.format(props.product.price)
 
+    const dateFormatter = new Intl.RelativeTimeFormat('pl-PL')
     return (
         <div className="product">
             <div className="product-image">
@@ -30,11 +31,12 @@ function Product(props) {
                 </div>
                 <span className="text-center">{price}</span>
                 <div className="product-desc text-secondary">
-                    <span className="block">Sprzedawca: {props.product.seller}</span>
-                    <span>Producent: {props.product.producer}</span>
+                    <span className="block">Ważność upływa: <b>{dateFormatter.format(props.product.waznosc, 'days')}</b></span>
+                    <span className="block">Sprzedawca: <b>{props.product.seller}</b></span>
+                    <span className="block">Producent: <b>{props.product.producer}</b></span>
                 </div>
                 <div className="product-btn-area">
-                    <a onClick={onClickButton} href="#/products"><CartAddIcon /></a>
+                    <a className="add-to-cart" onClick={onClickButton} href="#/products"><CartAddIcon /></a>
                 </div>
             </div>
         </div>

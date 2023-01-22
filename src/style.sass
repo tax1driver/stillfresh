@@ -321,6 +321,8 @@ body
     display: block
     line-height: 1.3em
 
+$accent-color: transparentize(#b8ec62, 0.7)
+
 .product-btn-area
     display: flex
     justify-content: center
@@ -333,15 +335,24 @@ body
         padding: 8px
         text-align: center
         text-decoration: none
-        border-radius: 50%
+        border-radius: 4px
         color: $bg-color
         font-weight: 700
         line-height: 180%
-        //background: #a3e635
+        background-color: transparent
+
+        transition: background-color 150ms
         //box-shadow: 0 0px 4px -2px #a3e635
 
-        fill: #a3e635
-        stroke: #a3e635
+        fill: lighten(#a3e635, 10%)
+        stroke: lighten(#a3e635, 10%)
+
+        &:hover
+            background-color: darken($bg-color, 6%)
+
+        &:active
+            background-color: darken($bg-color, 10%)
+        
         & > svg
             width: 22px
 
@@ -619,3 +630,4 @@ a
 
     text-decoration: none
     font-style: italic
+
