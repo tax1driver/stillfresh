@@ -12,6 +12,7 @@ function AccountPage(props) {
         return (<Navigate to="/lr"></Navigate>)
 
     const logout = () => {
+        console.log("test");
         setAccount(null);
         navigate("/");
     }
